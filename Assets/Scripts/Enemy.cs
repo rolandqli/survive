@@ -68,6 +68,7 @@ public class Enemy : MonoBehaviour
     {
         spawnManager.enemyDeath();
         expOrb.transform.position = transform.position;
+        expOrb.GetComponent<Exp>().setAmount(10f);
         Instantiate(expOrb);
 
         Destroy(this.gameObject);

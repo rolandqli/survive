@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 //using System.Collections.Generic;
 using UnityEngine.UI;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
@@ -10,12 +11,15 @@ public class Player : MonoBehaviour
     Vector2 movement;
     Animator anim;
     public Slider HPSlider;
+    public Slider EXPSlider;
+    public TMP_Text levelText;
 
     // Stats
     private float currHP;
     public float maxHP = 30;
-    public int exp = 0;
-    public int level = 1;
+    private float exp = 0;
+    public float expForNextLevel = 30;
+    private int level = 1;
     public int luck = 30;
     private float moveSpeed = 50f;
 
@@ -34,11 +38,26 @@ public class Player : MonoBehaviour
         anim = GetComponent<Animator>();
         currHP = maxHP;
         HPSlider.value = 1;
+        EXPSlider.value = 0;
     }
 
     public void increaseDamage(int addedDamage)
     {
         damage += addedDamage;
+    }
+
+    public void increaseEXP(float amount)
+    {
+        exp += amount;
+        Debug.Log(exp);
+        if (exp >= expForNextLevel)
+        {
+            exp = exp % expForNextLevel;
+            level += 1;
+            levelText.text = level.ToString();
+        }
+        EXPSlider.value = exp / expForNextLevel;
+
     }
 
     public void takeDamage(int damage)

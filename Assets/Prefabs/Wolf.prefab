@@ -167,3 +167,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 1
+  expOrb: {fileID: 1221461076036631082, guid: 74427996b3f6a6b4e857c48794a8a36c, type: 3}
