@@ -14,10 +14,10 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        /* TODO 2.2: Call Explode() if enemy comes in contact with player */
         GameObject collidedObject = other.gameObject;
         if (collidedObject.name == "Player")
         {
+            Debug.Log("i got hit");
             Player hitPlayer = collidedObject.GetComponent<Player>();
             hitPlayer.takeDamage(maxHP);
         }
@@ -57,9 +57,8 @@ public class Enemy : MonoBehaviour
 
     private void Move()
     {
-        /* TODO 2.1: Move the enemy towards the player */
         Transform initial_position = EnemyRB.transform;
-        EnemyRB.linearVelocity = -(initial_position.position - player.position) * moveMult;
+        EnemyRB.linearVelocity = -(initial_position.position - player.position).normalized * 10 * moveMult;
         //Debug.Log(EnemyRB.velocity);
 
     }

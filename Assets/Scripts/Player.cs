@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 //using System.Collections.Generic;
-//using UnityEngine.UI;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -9,15 +9,15 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     Vector2 movement;
     Animator anim;
-
+    public Slider HPSlider;
 
     // Stats
-    private int currHP;
-    public int maxHP = 30;
+    private float currHP;
+    public float maxHP = 30;
     public int exp = 0;
     public int level = 1;
     public int luck = 30;
-    public float moveSpeed = 5f;
+    private float moveSpeed = 50f;
 
     // Attack variables (need to change this to be based on weapon in hand)
     public int damage = 3;
@@ -33,12 +33,21 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         currHP = maxHP;
+        HPSlider.value = 1;
+    }
+
+    public void increaseDamage(int addedDamage)
+    {
+        damage += addedDamage;
     }
 
     public void takeDamage(int damage)
     {
         // Take damage
         currHP -= damage;
+        Debug.Log(currHP);
+        Debug.Log(maxHP);
+        HPSlider.value = currHP / maxHP;
 
         // Die lower than 0 HP
         if (currHP <= 0)
@@ -91,30 +100,6 @@ public class Player : MonoBehaviour
         attackTimer = attackSpeed;
     }
 
-    void VisualizeBox(Vector2 center, Vector2 size, float angle)
-    {
-        // Calculate the four corners of the box
-  
-
-        Quaternion rot = Quaternion.Euler(0, 0, angle);
-        Vector2 halfSize = size * 0.5f;
-
-        // Convert center to Vector3
-        Vector3 center3D = new Vector3(center.x, center.y, 0f);
-
-        // Rotate corner offsets using Quaternion and convert to Vector3
-        Vector3 topLeft = center3D + rot * new Vector3(-halfSize.x, halfSize.y, 0f);
-        Vector3 topRight = center3D + rot * new Vector3(halfSize.x, halfSize.y, 0f);
-        Vector3 bottomRight = center3D + rot * new Vector3(halfSize.x, -halfSize.y, 0f);
-        Vector3 bottomLeft = center3D + rot * new Vector3(-halfSize.x, -halfSize.y, 0f);
-
-        // Draw the box in Scene view
-        Debug.DrawLine(topLeft, topRight, Color.red);
-        Debug.DrawLine(topRight, bottomRight, Color.red);
-        Debug.DrawLine(bottomRight, bottomLeft, Color.red);
-        Debug.DrawLine(bottomLeft, topLeft, Color.red);
-    }
-
 
 
     IEnumerator AttackRoutine()
@@ -122,22 +107,15 @@ public class Player : MonoBehaviour
         isAttacking = true;
         anim.SetTrigger("Attack");
         //FindObjectOfType<AudioManager>().Play("PlayerAttack");
-        Vector2 boxCenter = rb.position + currDirection;
-        Vector2 boxSize = Vector2.one;
-        float angle = 0f;
-
-        VisualizeBox(boxCenter, boxSize, angle);
 
 
         yield return new WaitForSeconds(hitboxTiming);
-        RaycastHit2D[] hits = Physics2D.BoxCastAll(rb.position + currDirection, Vector2.one /4, 0f, Vector2.zero);
+        RaycastHit2D[] hits = Physics2D.BoxCastAll(rb.position + currDirection, Vector2.one * 20, 0f, Vector2.zero);
 
         foreach (RaycastHit2D hit in hits)
         {
             if (hit.transform.CompareTag("Enemy"))
             {
-                /* TODO 3.2: Call TakeDamage() inside of the enemy's Enemy script using
-                the "hit" reference variable */
                 Debug.Log("hit");
                 Enemy enemy = hit.collider.gameObject.GetComponent<Enemy>();
                 if (enemy != null)
@@ -154,6 +132,7 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         // Move based on input
+
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
 
