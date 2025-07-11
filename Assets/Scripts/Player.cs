@@ -36,6 +36,11 @@ public class Player : MonoBehaviour
         HPSlider.value = 1;
     }
 
+    public void increaseDamage(int addedDamage)
+    {
+        damage += addedDamage;
+    }
+
     public void takeDamage(int damage)
     {
         // Take damage
