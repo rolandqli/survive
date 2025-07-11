@@ -11,7 +11,6 @@ public class Player : MonoBehaviour
     Animator anim;
     public Slider HPSlider;
 
-
     // Stats
     private float currHP;
     public float maxHP = 30;
@@ -96,30 +95,6 @@ public class Player : MonoBehaviour
         attackTimer = attackSpeed;
     }
 
-    void VisualizeBox(Vector2 center, Vector2 size, float angle)
-    {
-        // Calculate the four corners of the box
-  
-
-        Quaternion rot = Quaternion.Euler(0, 0, angle);
-        Vector2 halfSize = size * 0.5f;
-
-        // Convert center to Vector3
-        Vector3 center3D = new Vector3(center.x, center.y, 0f);
-
-        // Rotate corner offsets using Quaternion and convert to Vector3
-        Vector3 topLeft = center3D + rot * new Vector3(-halfSize.x, halfSize.y, 0f);
-        Vector3 topRight = center3D + rot * new Vector3(halfSize.x, halfSize.y, 0f);
-        Vector3 bottomRight = center3D + rot * new Vector3(halfSize.x, -halfSize.y, 0f);
-        Vector3 bottomLeft = center3D + rot * new Vector3(-halfSize.x, -halfSize.y, 0f);
-
-        // Draw the box in Scene view
-        Debug.DrawLine(topLeft, topRight, Color.red);
-        Debug.DrawLine(topRight, bottomRight, Color.red);
-        Debug.DrawLine(bottomRight, bottomLeft, Color.red);
-        Debug.DrawLine(bottomLeft, topLeft, Color.red);
-    }
-
 
 
     IEnumerator AttackRoutine()
@@ -127,11 +102,6 @@ public class Player : MonoBehaviour
         isAttacking = true;
         anim.SetTrigger("Attack");
         //FindObjectOfType<AudioManager>().Play("PlayerAttack");
-        Vector2 boxCenter = rb.position + currDirection;
-        Vector2 boxSize = Vector2.one;
-        float angle = 0f;
-
-        VisualizeBox(boxCenter, boxSize, angle);
 
 
         yield return new WaitForSeconds(hitboxTiming);
