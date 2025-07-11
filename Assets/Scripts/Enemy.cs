@@ -28,7 +28,7 @@ public class Enemy : MonoBehaviour
     { 
         EnemyRB = GetComponent<Rigidbody2D>();
         currHP = maxHP;
-        moveMult = 0.1f;
+        moveMult = Random.Range(0f, 2f);
         player = GameObject.FindGameObjectWithTag("Player").transform;
         spawnManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<SpawnManager>();
     }
@@ -41,6 +41,18 @@ public class Enemy : MonoBehaviour
             Move();
         }
 
+    }
+
+    public void takeDamage(int damage)
+    {
+        // Take damage
+        currHP -= damage;
+
+        // Die lower than 0 HP
+        if (currHP <= 0)
+        {
+            Die();
+        }
     }
 
     private void Move()
@@ -57,12 +69,12 @@ public class Enemy : MonoBehaviour
         spawnManager.enemyDeath();
         Destroy(this.gameObject);
         
-    }
-    void OnMouseDown()
-    {
-        Debug.Log("Enemy clicked: " + gameObject.name);
+    } 
+    //void OnMouseDown()
+    //{
+    //    Debug.Log("Enemy clicked: " + gameObject.name);
 
-        Die();
-    }
+    //    Die();
+    //}
 
 }

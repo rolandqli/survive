@@ -476,12 +476,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1441b7a5020bcc4e8d06ee57714f5f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
   maxHP: 1
-  damage: 3
   exp: 0
   level: 1
   luck: 30
+  moveSpeed: 1
+  damage: 3
+  attackSpeed: 1
+  hitboxTiming: 0.1
+  endAnimationTiming: 0.1
 --- !u!50 &1094174014
 Rigidbody2D:
   serializedVersion: 5
@@ -660,7 +663,7 @@ GameObject:
   - component: {fileID: 1209921983}
   m_Layer: 0
   m_Name: SpawnManager
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -692,10 +695,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49507f52c8726d744a4e215bdbdef8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 0}
-  spawnPoints: []
+  enemyPrefab: {fileID: 7561528595305089162, guid: 2e9b53702fae4ad4a80a20e074bd38df, type: 3}
+  spawnPoints:
+  - {fileID: 0}
   enemiesPerWave: 5
-  timeBetweenWaves: 5
   timeBetweenSpawns: 1
 --- !u!1 &1822328955
 GameObject:
@@ -776,11 +779,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1012246880640558029, guid: 2e9b53702fae4ad4a80a20e074bd38df, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.368
+      value: -0.416
       objectReference: {fileID: 0}
     - target: {fileID: 1012246880640558029, guid: 2e9b53702fae4ad4a80a20e074bd38df, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.014
+      value: -0.367
       objectReference: {fileID: 0}
     - target: {fileID: 1012246880640558029, guid: 2e9b53702fae4ad4a80a20e074bd38df, type: 3}
       propertyPath: m_LocalPosition.z
@@ -813,6 +816,10 @@ PrefabInstance:
     - target: {fileID: 1012246880640558029, guid: 2e9b53702fae4ad4a80a20e074bd38df, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5690141081387905122, guid: 2e9b53702fae4ad4a80a20e074bd38df, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7561528595305089162, guid: 2e9b53702fae4ad4a80a20e074bd38df, type: 3}
       propertyPath: m_Name
