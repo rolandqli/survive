@@ -7,8 +7,8 @@ public class Player : MonoBehaviour
 
     Vector2 movement;
 
-    public int health;
-    public int max_health = 30;
+    private int currHP;
+    public int maxHP = 30;
     public int damage = 3;
     public int exp = 0;
     public int level = 1;
@@ -17,7 +17,16 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        health = max_health;
+        currHP = maxHP;
+    }
+
+    public void takeDamage(int damage)
+    {
+        currHP -= damage;
+        if (currHP <= 0)
+        {
+            Die();
+        }
     }
 
     // Update is called once per frame
@@ -35,5 +44,10 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+    }
+
+    void Die()
+    {
+        Destroy(this.gameObject);
     }
 }

@@ -14,6 +14,18 @@ public class Enemy : MonoBehaviour
         
     }
 
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        /* TODO 2.2: Call Explode() if enemy comes in contact with player */
+        GameObject collidedObject = other.gameObject;
+        if (collidedObject.name == "Player")
+        {
+            Player hitPlayer = collidedObject.GetComponent<Player>();
+            hitPlayer.takeDamage(maxHP);
+        }
+
+    }
+
     private void Awake()
     {
         EnemyRB = GetComponent<Rigidbody2D>();
