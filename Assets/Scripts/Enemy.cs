@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     public int maxHP = 1;
     private float moveMult;
     SpawnManager spawnManager;
+    public GameObject expOrb;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -66,6 +67,9 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         spawnManager.enemyDeath();
+        expOrb.transform.position = transform.position;
+        Instantiate(expOrb);
+
         Destroy(this.gameObject);
         
     } 
