@@ -4,7 +4,7 @@ public class Exp : MonoBehaviour
 {
     private Transform playerTransform;
     private Rigidbody2D rb;
-    private float amount;
+    private float amount = 10;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -44,6 +44,7 @@ public class Exp : MonoBehaviour
         {
             Debug.Log("Hit!");
             Player player = collidedObject.GetComponent<Player>();
+            Debug.Log("increasingexp");
             player.increaseEXP(amount);
             Destroy(this.gameObject);
         }

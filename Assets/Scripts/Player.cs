@@ -54,6 +54,7 @@ public class Player : MonoBehaviour
         {
             exp = exp % expForNextLevel;
             level += 1;
+            expForNextLevel += (level - 1) * 50;
             levelText.text = level.ToString();
         }
         EXPSlider.value = exp / expForNextLevel;
