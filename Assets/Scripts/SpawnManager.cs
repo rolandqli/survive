@@ -53,7 +53,7 @@ public class SpawnManager : MonoBehaviour
 
     void SpawnEnemy()
     {
-        int[] borders = {-1, 1};
+        int[] borders = {-50, 50};
 
         int randomValueX = borders[Random.Range(0, borders.Length)];
         int randomValueY = borders[Random.Range(0, borders.Length)];
