@@ -2,16 +2,19 @@ using UnityEngine;
 
 public class Exp : MonoBehaviour
 {
+    // Access to outside
     private Transform playerTransform;
+
+    // Physics
     private Rigidbody2D rb;
+
+    // Amount of XP
     private float amount = 10;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();
-
     }
 
     public void setAmount(float number)
@@ -25,12 +28,13 @@ public class Exp : MonoBehaviour
         
     }
 
+    // Magnet is a trigger so we use this
     void OnTriggerEnter2D(Collider2D other)
     {
         GameObject collidedObject = other.gameObject;
         if (collidedObject.name == "Magnet")
         {
-            Debug.Log("Magnetized!");
+            // Upon colliding with magnet collider, the orb should move to player
             Transform initial_position = transform;
             rb.linearVelocity = -(initial_position.position - playerTransform.position).normalized * 100;
         }
@@ -42,10 +46,11 @@ public class Exp : MonoBehaviour
         GameObject collidedObject = other.gameObject;
         if (collidedObject.name == "Player")
         {
-            Debug.Log("Hit!");
+            // Upon colliding with player, they should receive xp
             Player player = collidedObject.GetComponent<Player>();
-            Debug.Log("increasingexp");
             player.increaseEXP(amount);
+
+            // Disappear
             Destroy(this.gameObject);
         }
     }

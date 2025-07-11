@@ -2,16 +2,19 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    // Stats
     private int currHP;
-    Rigidbody2D EnemyRB;
-    private Transform player;
     public int maxHP = 1;
+    // Adds randomness
     private float moveMult;
+
+    // Physics
+    Rigidbody2D EnemyRB;
+
+    // Access to objects
+    private Transform player;
     SpawnManager spawnManager;
     public GameObject expOrb;
-
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -27,6 +30,7 @@ public class Enemy : MonoBehaviour
 
     private void Awake() 
     { 
+        // Set variables
         EnemyRB = GetComponent<Rigidbody2D>();
         currHP = maxHP;
         moveMult = Random.Range(0f, 2f);
@@ -58,19 +62,23 @@ public class Enemy : MonoBehaviour
 
     private void Move()
     {
+        // Gets direction vector then moves
         Transform initial_position = EnemyRB.transform;
         EnemyRB.linearVelocity = -(initial_position.position - player.position).normalized * 10 * moveMult;
-        //Debug.Log(EnemyRB.velocity);
 
     }
 
     private void Die()
     {
+        // Notifies manager of death
         spawnManager.enemyDeath();
+
+        // Spawns orb
         expOrb.transform.position = transform.position;
         expOrb.GetComponent<Exp>().setAmount(10f);
         Instantiate(expOrb);
 
+        // Disappears
         Destroy(this.gameObject);
         
     } 
