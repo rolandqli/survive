@@ -3,6 +3,7 @@ using System.Collections;
 //using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Networking;
 
 public class Player : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class Player : MonoBehaviour
     public Slider HPSlider;
     public Slider EXPSlider;
     public TMP_Text levelText;
+    public TextBubble textBubble;
 
     // Stats
     private float currHP;
@@ -39,6 +41,11 @@ public class Player : MonoBehaviour
         // Init sliders
         HPSlider.value = 1;
         EXPSlider.value = 0;
+        GameObject bubble = Instantiate(textBubblePrefab);
+        textBubble = bubble.GetComponent<TextBubble>();
+        tb.target = transform;
+        tb.SetText("Hello, traveler!");
+        StartCoroutine(requestToLLM("you are video game character fighting and killing wolves. you see a bunch coming at you. what do you say?Respond in a single line with only the answer. No introductions, no labels, no explanations."));
     }
 
     public void increaseDamage(int addedDamage)
@@ -158,5 +165,45 @@ public class Player : MonoBehaviour
     void Die()
     {
         Destroy(this.gameObject);
+    }
+
+    
+
+    IEnumerator requestToLLM(string prompt)
+    {
+        Debug.Log(prompt);
+        string url = "http://localhost:11434/api/generate";
+        string json = $"{{\"model\":\"gemma3\",\"prompt\":\"{prompt}\",\"stream\":false}}"; ;
+        Debug.Log(json);    
+        byte[] body = System.Text.Encoding.UTF8.GetBytes(json);
+
+        using (UnityWebRequest request = new UnityWebRequest(url, "POST"))
+        {
+            request.uploadHandler = new UploadHandlerRaw(body);
+            request.downloadHandler = new DownloadHandlerBuffer();
+            request.SetRequestHeader("Content-Type", "application/json");
+
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                string rawJson = request.downloadHandler.text;
+                OllamaResponse response = JsonUtility.FromJson<OllamaResponse>(rawJson);
+
+                string firstLine = response.response.Split('\n')[0].Trim();
+                Debug.Log("LLM Says: " + firstLine);
+            }
+            else
+            {
+                Debug.LogError("Error: " + request.error);
+            }
+        }
+    }
+    [System.Serializable]
+    public class OllamaResponse
+    {
+        public string model;
+        public string response;
+        public bool done;
     }
 }
