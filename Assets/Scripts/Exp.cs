@@ -20,9 +20,9 @@ public class Exp : MonoBehaviour
 
     public void setAmount(float number)
     {
-        Debug.Log(amount);
+        //Debug.Log(amount);
         amount = number;
-        Debug.Log(amount);
+        //Debug.Log(amount);
     }
 
     // Update is called once per frame
@@ -46,7 +46,7 @@ public class Exp : MonoBehaviour
         else if (collidedObject.name == "Player")
         {
             // Upon colliding with player, they should receive xp
-            Debug.Log("Leveling Up! Sending " + amount);
+            //Debug.Log("Leveling Up! Sending " + amount);
             Player player = collidedObject.GetComponent<Player>();
             player.increaseEXP(amount);
 
