@@ -7,10 +7,14 @@ public class Projectile : MonoBehaviour
     public int damage = 1;
     private Rigidbody2D rb;
     private string source;
+    Player player;
+    
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
         rb.linearVelocity = transform.right * speed; 
         Destroy(gameObject, lifeTime);
     }
@@ -36,6 +40,10 @@ public class Projectile : MonoBehaviour
             if (other.gameObject.transform.CompareTag("Enemy"))
             {
                 other.gameObject.GetComponent<Enemy>().takeDamage(damage);
+                if (player.healOnHitStatus())
+                {
+                    player.Heal(1);
+                }
                 Destroy(gameObject);
             }
         }

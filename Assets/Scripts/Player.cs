@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     public string attackStyle;
     public GameObject projectile;
     public Canvas augmentUI;
+    private bool healOnHit = false;
 
     // Stats
     private float currHP;
@@ -178,11 +179,31 @@ public class Player : MonoBehaviour
                 if (enemy != null)
                 {
                     enemy.takeDamage(damage);
+                    if (healOnHit) 
+                    {
+                        Heal(1);
+                    }
+
                 }
             }
         }
 
         yield return new WaitForSeconds(hitboxTiming);
+    }
+
+    public bool healOnHitStatus()
+    {
+        return healOnHit;
+    }
+
+    public void changeHealOnHit()
+    {
+        healOnHit = true;
+    }
+
+    public void Heal(float amount)
+    {
+        currHP += amount;
     }
 
     void FixedUpdate()

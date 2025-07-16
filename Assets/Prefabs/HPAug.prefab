@@ -18,11 +18,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2600981061368094306, guid: a73fcd733b81aac4abea0d08484494f7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2600981061368094306, guid: a73fcd733b81aac4abea0d08484494f7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2600981061368094306, guid: a73fcd733b81aac4abea0d08484494f7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -34,19 +34,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2600981061368094306, guid: a73fcd733b81aac4abea0d08484494f7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Disappear
-      objectReference: {fileID: 0}
-    - target: {fileID: 2600981061368094306, guid: a73fcd733b81aac4abea0d08484494f7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: increaseHP
       objectReference: {fileID: 0}
     - target: {fileID: 2600981061368094306, guid: a73fcd733b81aac4abea0d08484494f7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Disappear
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600981061368094306, guid: a73fcd733b81aac4abea0d08484494f7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Augments, Assembly-CSharp
+      value: Player, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2600981061368094306, guid: a73fcd733b81aac4abea0d08484494f7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: Player, Assembly-CSharp
+      value: Augments, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600981061368094306, guid: a73fcd733b81aac4abea0d08484494f7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2600981061368094306, guid: a73fcd733b81aac4abea0d08484494f7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
@@ -62,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4634674541461846682, guid: a73fcd733b81aac4abea0d08484494f7, type: 3}
       propertyPath: m_Name
-      value: AugmentButton (2) Variant
+      value: HPAug
       objectReference: {fileID: 0}
     - target: {fileID: 6754357095151573816, guid: a73fcd733b81aac4abea0d08484494f7, type: 3}
       propertyPath: m_text
