@@ -50,6 +50,8 @@ public class Player : MonoBehaviour
 
     public void increaseEXP(float amount)
     {
+
+        Debug.Log("Received" + amount.ToString()+"exp");
         exp += amount;
 
         // Logic for when hitting a level
