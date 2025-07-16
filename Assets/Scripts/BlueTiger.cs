@@ -4,7 +4,7 @@ using System.Collections;
 
 public class BlueTiger : Enemy
 {
-    public float shootTimer = 1;
+    public float shootTimer = 3;
     public GameObject enemyProjectile;
     float hitboxTiming = 0.1f;
 
@@ -27,6 +27,10 @@ public class BlueTiger : Enemy
 
         // throws out a hit box
         yield return new WaitForSeconds(hitboxTiming);
+        Vector3 direction = player.position - transform.position;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angle);
         GameObject newProjectile = Instantiate(enemyProjectile, transform.position, transform.rotation);
         newProjectile.GetComponent<Projectile>().setSource("Enemy");
 
