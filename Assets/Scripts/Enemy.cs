@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         if (player != null)
         {
@@ -68,7 +68,7 @@ public class Enemy : MonoBehaviour
 
     }
 
-    private void Die()
+    protected virtual void Die()
     {
         // Notifies manager of death
         spawnManager.enemyDeath();

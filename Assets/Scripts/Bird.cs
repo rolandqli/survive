@@ -9,7 +9,7 @@ public class Bird : Enemy
     public float jumpTimer = 1;
 
 
-    void Update()
+    protected override void Update()
     {
         jumpTimer -= Time.deltaTime;
         if (jumpTimer < 0) {
@@ -46,13 +46,14 @@ public class Bird : Enemy
     // Update is called once per frame
     //public GameObject expOrb;
 
-    void Die()
+    protected override void Die()
     {
         // Notifies manager of death
         spawnManager.enemyDeath();
 
         // Spawns orb
         GameObject newOrb = Instantiate(expOrb);
+        //Debug.Log("setting exp");
         newOrb.GetComponent<Exp>().setAmount(20f);
         newOrb.transform.position = transform.position;
 
