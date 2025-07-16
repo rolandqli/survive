@@ -5,6 +5,8 @@ public class Enemy : MonoBehaviour
     // Stats
     private int currHP;
     public int maxHP = 1;
+    public int damage = 1;
+    public float exp = 10;
     // Adds randomness
     private float moveMult;
 
@@ -23,7 +25,7 @@ public class Enemy : MonoBehaviour
         {
             //Debug.Log("i got hit");
             Player hitPlayer = collidedObject.GetComponent<Player>();
-            hitPlayer.takeDamage(maxHP);
+            hitPlayer.takeDamage(damage);
         }
 
     }
@@ -60,7 +62,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void Move()
+    protected virtual void Move()
     {
         // Gets direction vector then moves
         Transform initial_position = EnemyRB.transform;
@@ -75,7 +77,7 @@ public class Enemy : MonoBehaviour
 
         // Spawns orb
         GameObject newOrb = Instantiate(expOrb);
-        newOrb.GetComponent<Exp>().setAmount(10f);
+        newOrb.GetComponent<Exp>().setAmount(exp);
         newOrb.transform.position = transform.position;
 
 

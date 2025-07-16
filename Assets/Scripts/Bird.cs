@@ -25,7 +25,7 @@ public class Bird : Enemy
         Vector3 direction = (player.position - start).normalized;
         float elapsed = 0f;
 
-        Vector3 target = direction * 10 + start;
+        Vector3 target = direction * 20 + start;
 
         while (elapsed < duration)
         {
@@ -45,22 +45,5 @@ public class Bird : Enemy
 
     // Update is called once per frame
     //public GameObject expOrb;
-
-    protected override void Die()
-    {
-        // Notifies manager of death
-        spawnManager.enemyDeath();
-
-        // Spawns orb
-        GameObject newOrb = Instantiate(expOrb);
-        //Debug.Log("setting exp");
-        newOrb.GetComponent<Exp>().setAmount(20f);
-        newOrb.transform.position = transform.position;
-
-
-        // Disappears
-        Destroy(this.gameObject);
-
-    }
 
 }
