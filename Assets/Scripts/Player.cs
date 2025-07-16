@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
     public float hitboxTiming = 0.1f;
     public float endAnimationTiming = 0.1f;
     Vector2 currDirection;
+
     void Start()
     {
         // Init access
@@ -51,7 +52,7 @@ public class Player : MonoBehaviour
     public void increaseEXP(float amount)
     {
 
-        Debug.Log("Received" + amount.ToString()+"exp");
+        //Debug.Log("Received" + amount.ToString()+"exp");
         exp += amount;
 
         // Logic for when hitting a level
