@@ -140,7 +140,8 @@ public class Player : MonoBehaviour
 
         // throws out a hit box
         yield return new WaitForSeconds(hitboxTiming);
-        Instantiate(projectile, transform.position, transform.rotation);
+        GameObject newProjectile = Instantiate(projectile, transform.position, transform.rotation);
+        newProjectile.GetComponent<Projectile>().setSource("Player");
 
         yield return new WaitForSeconds(hitboxTiming);
     }
