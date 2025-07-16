@@ -9,11 +9,11 @@ public class Enemy : MonoBehaviour
     private float moveMult;
 
     // Physics
-    Rigidbody2D EnemyRB;
+    protected Rigidbody2D EnemyRB;
 
     // Access to objects
-    private Transform player;
-    SpawnManager spawnManager;
+    protected Transform player;
+    protected SpawnManager spawnManager;
     public GameObject expOrb;
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -28,7 +28,7 @@ public class Enemy : MonoBehaviour
 
     }
 
-    private void Awake() 
+    public void Awake() 
     { 
         // Set variables
         EnemyRB = GetComponent<Rigidbody2D>();
