@@ -10,6 +10,7 @@ public class SpawnManager : MonoBehaviour
     // Parameters of spawning
     public float timeBetweenSpawns = 1f;
     public float waveDuration = 30f;
+    private GameObject player;
 
     // Counts waves (probably should use text to indicate what wave we on. preference thing)
     private int currentWave = 0;
@@ -20,7 +21,10 @@ public class SpawnManager : MonoBehaviour
 
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+
         StartCoroutine(WaveLoop());
+
 
     }
 
@@ -40,6 +44,7 @@ public class SpawnManager : MonoBehaviour
             Debug.Log("Wave " +  currentWave);
             // spawn a wave (should make this func more complex)
             yield return StartCoroutine(SpawnWave());
+            timeBetweenSpawns -= 0.3f;
 
         }
     }
@@ -53,7 +58,7 @@ public class SpawnManager : MonoBehaviour
             // randomized timing in between
             float nextSpawnTime = Random.Range(0, timeBetweenSpawns);
             i += nextSpawnTime;
-            Debug.Log("i " + i);
+            //Debug.Log("i " + i);
 
             SpawnEnemy();
             yield return new WaitForSeconds(nextSpawnTime);
@@ -63,16 +68,9 @@ public class SpawnManager : MonoBehaviour
 
     void SpawnEnemy()
     {
-        // spawns enemy on random location on borders of the map
-        int[] borders = {-50, 50};
+        // spawns enemy on random location offscreen
+        Vector2 randomPos = (Vector2)player.transform.position + Random.insideUnitCircle.normalized * 100;
 
-        int randomValueX = borders[Random.Range(0, borders.Length)];
-        int randomValueY = borders[Random.Range(0, borders.Length)];
-        Vector3 randomPos = new Vector3(
-            randomValueX,
-            randomValueY,
-            transform.position.z
-        );
 
         // instantiate given location
         int index = Random.Range(0, currentWave);

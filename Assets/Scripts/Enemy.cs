@@ -36,6 +36,11 @@ public class Enemy : MonoBehaviour
         EnemyRB = GetComponent<Rigidbody2D>();
         currHP = maxHP;
         moveMult = Random.Range(0f, 2f);
+        
+    }
+
+    void Start()
+    {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         spawnManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<SpawnManager>();
     }
