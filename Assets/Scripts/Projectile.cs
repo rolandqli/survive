@@ -10,18 +10,17 @@ public class Projectile : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.linearVelocity = transform.right * speed; // Right is local "forward" in 2D
+        rb.linearVelocity = transform.right * speed; 
         Destroy(gameObject, lifeTime);
     }
 
-    void OnTrigger2DEnter(Collider other)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        // Optional: check tag or health component
         Debug.Log("Hit: " + other.name);
         if (other.gameObject.transform.CompareTag("Enemy"))
         {
             other.gameObject.GetComponent<Enemy>().takeDamage(damage);
+            Destroy(gameObject);
         }
-        Destroy(gameObject); // destroy on collision
     }
 }
