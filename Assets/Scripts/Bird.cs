@@ -25,7 +25,7 @@ public class Bird : Enemy
         Vector3 direction = (player.position - start).normalized;
         float elapsed = 0f;
 
-        Vector3 target = direction * 10 + start;
+        Vector3 target = direction * 20 + start;
 
         while (elapsed < duration)
         {
