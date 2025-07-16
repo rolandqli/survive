@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     public Slider HPSlider;
     public Slider EXPSlider;
     public TMP_Text levelText;
+    public string attackStyle;
+    public GameObject projectile;
 
     // Stats
     private float currHP;
@@ -118,10 +120,28 @@ public class Player : MonoBehaviour
    
     private void Attack()
     {
-        StartCoroutine(AttackRoutine());
-        attackTimer = attackSpeed;
+        if (attackStyle == "Melee") {
+            StartCoroutine(AttackRoutine());
+            attackTimer = attackSpeed;
+        }
+        else
+        {
+            StartCoroutine(ProjectileAttack());
+            attackTimer = attackSpeed;
+        }
     }
 
+    IEnumerator ProjectileAttack()
+    {
+        // flag for nothing to happen
+        anim.SetTrigger("Attack");
+
+        // throws out a hit box
+        yield return new WaitForSeconds(hitboxTiming);
+        Instantiate(projectile, transform.position, transform.rotation);
+
+        yield return new WaitForSeconds(hitboxTiming);
+    }
 
 
     IEnumerator AttackRoutine()

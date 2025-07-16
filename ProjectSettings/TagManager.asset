@@ -7,6 +7,7 @@ TagManager:
   - GameManager
   - Enemy
   - Magnet
+  - Projectile
   layers:
   - Default
   - TransparentFX
