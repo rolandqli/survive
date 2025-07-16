@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     public TMP_Text levelText;
     public string attackStyle;
     public GameObject projectile;
+    public Canvas augmentUI;
 
     // Stats
     private float currHP;
@@ -48,6 +49,15 @@ public class Player : MonoBehaviour
     {
         damage += addedDamage;
     }
+    public void increaseSpeed(int addedSpeed)
+    {
+        moveSpeed += addedSpeed;
+    }
+    public void increaseHP(int addedHP)
+    {
+        currHP += addedHP;
+        maxHP += addedHP;
+    }
 
     public void increaseEXP(float amount)
     {
@@ -62,6 +72,8 @@ public class Player : MonoBehaviour
             level += 1;
             expForNextLevel += (level - 1) * 50;
             levelText.text = level.ToString();
+            augmentUI.gameObject.SetActive(true);
+            Time.timeScale = 0f;
         }
         EXPSlider.value = exp / expForNextLevel;
 
