@@ -46,21 +46,4 @@ public class Bird : Enemy
     // Update is called once per frame
     //public GameObject expOrb;
 
-    protected override void Die()
-    {
-        // Notifies manager of death
-        spawnManager.enemyDeath();
-
-        // Spawns orb
-        GameObject newOrb = Instantiate(expOrb);
-        //Debug.Log("setting exp");
-        newOrb.GetComponent<Exp>().setAmount(20f);
-        newOrb.transform.position = transform.position;
-
-
-        // Disappears
-        Destroy(this.gameObject);
-
-    }
-
 }
