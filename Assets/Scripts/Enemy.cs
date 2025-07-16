@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
         GameObject collidedObject = other.gameObject;
         if (collidedObject.name == "Player")
         {
-            Debug.Log("i got hit");
+            //Debug.Log("i got hit");
             Player hitPlayer = collidedObject.GetComponent<Player>();
             hitPlayer.takeDamage(maxHP);
         }
@@ -74,9 +74,10 @@ public class Enemy : MonoBehaviour
         spawnManager.enemyDeath();
 
         // Spawns orb
-        expOrb.transform.position = transform.position;
-        expOrb.GetComponent<Exp>().setAmount(10f);
-        Instantiate(expOrb);
+        GameObject newOrb = Instantiate(expOrb);
+        newOrb.GetComponent<Exp>().setAmount(10f);
+        newOrb.transform.position = transform.position;
+
 
         // Disappears
         Destroy(this.gameObject);
