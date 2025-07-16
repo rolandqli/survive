@@ -73,6 +73,7 @@ public class Player : MonoBehaviour
             level += 1;
             expForNextLevel += (level - 1) * 50;
             levelText.text = level.ToString();
+            augmentUI.gameObject.GetComponent<Augments>().shuffle();
             augmentUI.gameObject.SetActive(true);
             Time.timeScale = 0f;
         }
