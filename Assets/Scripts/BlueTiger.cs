@@ -7,7 +7,14 @@ public class BlueTiger : Enemy
     public float shootTimer = 3;
     public GameObject enemyProjectile;
     float hitboxTiming = 0.1f;
+    SpriteRenderer sprite;
 
+    protected override void Start()
+    {
+        base.Start();
+        sprite = GetComponent<SpriteRenderer>();
+
+    }
 
     protected override void Update()
     {
@@ -30,8 +37,16 @@ public class BlueTiger : Enemy
         Vector3 direction = player.position - transform.position;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
-        GameObject newProjectile = Instantiate(enemyProjectile, transform.position, transform.rotation);
+        if (Mathf.Abs(angle) >= 90)
+        {
+            sprite.flipX = true;
+        }
+        else {
+            sprite.flipX = false;
+        }
+
+        Quaternion projectileDirection = Quaternion.Euler(0, 0, angle);
+        GameObject newProjectile = Instantiate(enemyProjectile, transform.position, projectileDirection);
         newProjectile.GetComponent<Projectile>().setSource("Enemy");
 
         yield return new WaitForSeconds(hitboxTiming);
