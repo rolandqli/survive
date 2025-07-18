@@ -4,6 +4,7 @@ using System.Collections;
 using UnityEngine.UI;
 using TMPro;
 
+
 public class Player : MonoBehaviour
 {
     // Access Physics
@@ -17,6 +18,7 @@ public class Player : MonoBehaviour
     public GameObject projectile;
     public Canvas augmentUI;
     private bool healOnHit = false;
+
 
     // Stats
     private float currHP;
@@ -41,6 +43,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         currHP = maxHP;
+
         // Init sliders
         HPSlider.value = 1;
         EXPSlider.value = 0;
@@ -132,6 +135,8 @@ public class Player : MonoBehaviour
         // Animation directions
         anim.SetFloat("DirX", currDirection.x);
         anim.SetFloat("DirY", currDirection.y);
+        //Vector3 clamped = transform.position;
+
     }
 
    
