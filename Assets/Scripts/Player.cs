@@ -4,6 +4,7 @@ using System.Collections;
 using UnityEngine.UI;
 using TMPro;
 
+
 public class Player : MonoBehaviour
 {
     // Access Physics
@@ -16,6 +17,8 @@ public class Player : MonoBehaviour
     public string attackStyle;
     public GameObject projectile;
     public Canvas augmentUI;
+    private bool healOnHit = false;
+
 
     // Stats
     private float currHP;
@@ -40,6 +43,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         currHP = maxHP;
+
         // Init sliders
         HPSlider.value = 1;
         EXPSlider.value = 0;
@@ -72,6 +76,7 @@ public class Player : MonoBehaviour
             level += 1;
             expForNextLevel += (level - 1) * 50;
             levelText.text = level.ToString();
+            augmentUI.gameObject.GetComponent<Augments>().shuffle();
             augmentUI.gameObject.SetActive(true);
             Time.timeScale = 0f;
         }
@@ -130,6 +135,8 @@ public class Player : MonoBehaviour
         // Animation directions
         anim.SetFloat("DirX", currDirection.x);
         anim.SetFloat("DirY", currDirection.y);
+        //Vector3 clamped = transform.position;
+
     }
 
    
@@ -178,11 +185,31 @@ public class Player : MonoBehaviour
                 if (enemy != null)
                 {
                     enemy.takeDamage(damage);
+                    if (healOnHit) 
+                    {
+                        Heal(1);
+                    }
+
                 }
             }
         }
 
         yield return new WaitForSeconds(hitboxTiming);
+    }
+
+    public bool healOnHitStatus()
+    {
+        return healOnHit;
+    }
+
+    public void changeHealOnHit()
+    {
+        healOnHit = true;
+    }
+
+    public void Heal(float amount)
+    {
+        currHP += amount;
     }
 
     void FixedUpdate()

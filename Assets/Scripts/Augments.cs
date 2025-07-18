@@ -1,19 +1,65 @@
 using UnityEngine;
 using UnityEngine.UI;
-
+using System;
+using System.Linq;
 
 public class Augments : MonoBehaviour
 {
-    Player player;
+    int numAugs = 3;
+    float[] positions = {-200f, 0f, 200f};
+    public GameObject augButton;
+    public Augment[] allAugments;
+
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Disappear();
-        Button brutalAug = GameObject.Find("BrutalAug").GetComponent<Button>();
+    }
+    void applyAugment(Augment targetAugment)
+    {
+        targetAugment.Apply();
+    }
 
-        Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    public void shuffle()
+    {
 
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+        Debug.Log("Destroyed Everything");
+        Augment[] sample = allAugments.OrderBy(x => UnityEngine.Random.value).Take(numAugs).ToArray();
+        Debug.Log("Length Sample: " + sample.Length.ToString());
+        for (int i = 0; i < numAugs; i++)
+        {
+            Debug.Log("Loop Num: " + i.ToString());
+            GameObject newObj = newButton(augButton, positions[i]);
+            newObj.GetComponent<AugmentButton>().Setup(sample[i], applyAugment);
+
+        }
+
+    }
+
+    GameObject newButton(GameObject augmentButton, float xVal)
+    {
+        GameObject newObj = Instantiate(augmentButton, transform);
+        Debug.Log("Instantiated!");
+        newObj.GetComponent<RectTransform>().anchoredPosition = new Vector2(xVal, 0);
+        return newObj;
+    }
+
+    //void newButton(GameObject augment, GameObject original)
+    //{
+    //    IGameObject newObj = Instantiate(firstAug, original.transform.position, original.transform.rotation);
+    //    Destroy(firstButton);
+    //}
+
+    Vector3 editPosX(GameObject augButton, float xValue)
+    {
+        Vector2 initPosition = new Vector2(xValue, 0);
+        return initPosition;
     }
 
     public void Disappear()

@@ -41,7 +41,7 @@ public class SpawnManager : MonoBehaviour
 
             // add to wave int
             currentWave++;
-            Debug.Log("Wave " +  currentWave);
+            //Debug.Log("Wave " +  currentWave);
             // spawn a wave (should make this func more complex)
             yield return StartCoroutine(SpawnWave());
             timeBetweenSpawns -= 0.3f;
@@ -63,7 +63,7 @@ public class SpawnManager : MonoBehaviour
             SpawnEnemy();
             yield return new WaitForSeconds(nextSpawnTime);
         }
-        Debug.Log("Finished Wave");
+        //Debug.Log("Finished Wave");
     }
 
     void SpawnEnemy()
