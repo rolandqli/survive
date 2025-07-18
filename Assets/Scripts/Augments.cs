@@ -15,8 +15,7 @@ public class Augments : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        GameObject newObj = newButton(augButton, positions[0]);
-        newObj.GetComponent<AugmentButton>().Setup(allAugments[0], applyAugment);
+        Disappear();
     }
     void applyAugment(Augment targetAugment)
     {
