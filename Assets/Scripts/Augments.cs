@@ -15,7 +15,8 @@ public class Augments : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Disappear();
+        GameObject newObj = newButton(augButton, positions[0]);
+        newObj.GetComponent<AugmentButton>().Setup(allAugments[0], applyAugment);
     }
     void applyAugment(Augment targetAugment)
     {
@@ -31,10 +32,10 @@ public class Augments : MonoBehaviour
         }
         Debug.Log("Destroyed Everything");
         Augment[] sample = allAugments.OrderBy(x => UnityEngine.Random.value).Take(numAugs).ToArray();
-        Debug.Log(sample.Length);
-        for (int i = 0; i == numAugs - 1; i++)
+        Debug.Log("Length Sample: " + sample.Length.ToString());
+        for (int i = 0; i < numAugs; i++)
         {
-
+            Debug.Log("Loop Num: " + i.ToString());
             GameObject newObj = newButton(augButton, positions[i]);
             newObj.GetComponent<AugmentButton>().Setup(sample[i], applyAugment);
 
@@ -45,6 +46,7 @@ public class Augments : MonoBehaviour
     GameObject newButton(GameObject augmentButton, float xVal)
     {
         GameObject newObj = Instantiate(augmentButton, transform);
+        Debug.Log("Instantiated!");
         newObj.GetComponent<RectTransform>().anchoredPosition = new Vector2(xVal, 0);
         return newObj;
     }
