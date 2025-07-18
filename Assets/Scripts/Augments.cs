@@ -1,54 +1,48 @@
 using UnityEngine;
 using UnityEngine.UI;
-
+using System;
+using System.Linq;
 
 public class Augments : MonoBehaviour
 {
-    Player player;
-    public GameObject[] augmentList;
-    GameObject firstButton;
-    GameObject secondButton;
-    GameObject thirdButton;
+    int numAugs = 3;
+    float[] positions = {-200f, 0f, 200f};
+    public GameObject augButton;
+    public Augment[] allAugments;
 
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        firstButton = GameObject.Find("BrutalAug");
-        secondButton = GameObject.Find("SpeedAug");
-
-        thirdButton = GameObject.Find("HPAug");
-
-
         Disappear();
-
-        Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-
+    }
+    void applyAugment(Augment targetAugment)
+    {
+        targetAugment.Apply();
     }
 
     public void shuffle()
     {
-        int index = Random.Range(0, augmentList.Length);
-        GameObject firstAug = augmentList[index];
-        Destroy(firstButton);
-        firstButton = newButton(firstAug, -200);
 
-        GameObject secondAug = augmentList[index];
-        Destroy(secondButton);
-        secondButton = newButton(secondAug, 0);
-        //secondAug.transform.position = editPosX(secondAug, 0);
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+        Debug.Log("Destroyed Everything");
+        Augment[] sample = allAugments.OrderBy(x => UnityEngine.Random.value).Take(numAugs).ToArray();
+        Debug.Log(sample.Length);
+        for (int i = 0; i == numAugs - 1; i++)
+        {
 
-        GameObject thirdAug = augmentList[index];
-        Destroy(thirdButton);
-        thirdButton = newButton(thirdAug, 200);
-        //thirdButton.transform.position = editPosX(thirdAug, 200);
+            GameObject newObj = newButton(augButton, positions[i]);
+            newObj.GetComponent<AugmentButton>().Setup(sample[i], applyAugment);
 
-        //int index = Random.Range(0, augmentList.Length);
+        }
 
     }
 
-    GameObject newButton(GameObject augmentButton, int xVal)
+    GameObject newButton(GameObject augmentButton, float xVal)
     {
         GameObject newObj = Instantiate(augmentButton, transform);
         newObj.GetComponent<RectTransform>().anchoredPosition = new Vector2(xVal, 0);
