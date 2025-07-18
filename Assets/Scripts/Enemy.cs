@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour
         
     }
 
-    void Start()
+    protected virtual void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         spawnManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<SpawnManager>();
@@ -71,7 +71,7 @@ public class Enemy : MonoBehaviour
     {
         // Gets direction vector then moves
         Transform initial_position = EnemyRB.transform;
-        EnemyRB.linearVelocity = -(initial_position.position - player.position).normalized * 10 * moveMult;
+        EnemyRB.linearVelocity = -(initial_position.position - player.position).normalized * 20 * moveMult;
 
     }
 
