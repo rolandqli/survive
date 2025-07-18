@@ -1149,12 +1149,12 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1094174013}
           m_TargetAssemblyTypeName: Player, Assembly-CSharp
-          m_MethodName: increaseEXP
-          m_Mode: 4
+          m_MethodName: increaseDamage
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
+            m_IntArgument: 10
             m_FloatArgument: 10
             m_StringArgument: 
             m_BoolArgument: 0
@@ -1173,7 +1173,7 @@ MonoBehaviour:
           m_CallState: 2
   - name: Hermes
     icon: {fileID: 2193422527768705183, guid: 906d5de3f9ce7564290c100fa743813d, type: 3}
-    description: Movement +10
+    description: Movement doubled
     onApply:
       m_PersistentCalls:
         m_Calls:
@@ -1184,7 +1184,7 @@ MonoBehaviour:
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
+            m_IntArgument: 50
             m_FloatArgument: 10
             m_StringArgument: 
             m_BoolArgument: 0
@@ -1209,7 +1209,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1094174013}
           m_TargetAssemblyTypeName: Player, Assembly-CSharp
-          m_MethodName: increaseSpeed
+          m_MethodName: increaseHP
           m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1796,7 +1796,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9002322375082203365, guid: 3463aeafd2f74df44928cf62b8c45110, type: 3}
       propertyPath: allAugments.Array.data[1].description
-      value: Movement +10
+      value: Movement doubled
       objectReference: {fileID: 0}
     - target: {fileID: 9002322375082203365, guid: 3463aeafd2f74df44928cf62b8c45110, type: 3}
       propertyPath: allAugments.Array.data[2].description
@@ -1816,7 +1816,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9002322375082203365, guid: 3463aeafd2f74df44928cf62b8c45110, type: 3}
       propertyPath: allAugments.Array.data[0].onApply.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9002322375082203365, guid: 3463aeafd2f74df44928cf62b8c45110, type: 3}
       propertyPath: allAugments.Array.data[0].onApply.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -1924,7 +1924,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9002322375082203365, guid: 3463aeafd2f74df44928cf62b8c45110, type: 3}
       propertyPath: allAugments.Array.data[0].onApply.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: increaseEXP
+      value: increaseDamage
       objectReference: {fileID: 0}
     - target: {fileID: 9002322375082203365, guid: 3463aeafd2f74df44928cf62b8c45110, type: 3}
       propertyPath: allAugments.Array.data[0].onApply.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -1948,7 +1948,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9002322375082203365, guid: 3463aeafd2f74df44928cf62b8c45110, type: 3}
       propertyPath: allAugments.Array.data[2].onApply.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: increaseSpeed
+      value: increaseHP
       objectReference: {fileID: 0}
     - target: {fileID: 9002322375082203365, guid: 3463aeafd2f74df44928cf62b8c45110, type: 3}
       propertyPath: allAugments.Array.data[2].onApply.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -1993,6 +1993,14 @@ PrefabInstance:
     - target: {fileID: 9002322375082203365, guid: 3463aeafd2f74df44928cf62b8c45110, type: 3}
       propertyPath: allAugments.Array.data[2].onApply.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
       value: Augments, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 9002322375082203365, guid: 3463aeafd2f74df44928cf62b8c45110, type: 3}
+      propertyPath: allAugments.Array.data[0].onApply.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9002322375082203365, guid: 3463aeafd2f74df44928cf62b8c45110, type: 3}
+      propertyPath: allAugments.Array.data[1].onApply.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 9002322375082203365, guid: 3463aeafd2f74df44928cf62b8c45110, type: 3}
       propertyPath: allAugments.Array.data[2].onApply.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
